@@ -28,14 +28,13 @@ val serviceModule = module {
 
     single<OpenWeatherLocalService> { getWeatherLocalService(get()) }
 
-    //Retrofit lastFm
+    // Retrofit lastFm
     factory { LastFMApiKeyInterceptor() }
 
-    single { getLastFMRetrofit(get(),get<LastFMApiKeyInterceptor>())}
+    single { getLastFMRetrofit(get(), get<LastFMApiKeyInterceptor>()) }
 
-    //lastFm retrofit object
+    // lastFm retrofit object
     single { getLastFmRemoteService(get()) }
-
 }
 
 fun getWeatherLocalService(database: AndroidTemplateDatabase): OpenWeatherLocalServiceImpl {
@@ -46,6 +45,6 @@ fun getWeatherRemoteService(retrofit: Retrofit): OpenWeatherRemoteService {
     return retrofit.create(OpenWeatherRemoteService::class.java)
 }
 
-fun getLastFmRemoteService(retrofit: Retrofit) : LastFmRemoteService{
-    return  retrofit.create(LastFmRemoteService::class.java)
+fun getLastFmRemoteService(retrofit: Retrofit): LastFmRemoteService {
+    return retrofit.create(LastFmRemoteService::class.java)
 }
