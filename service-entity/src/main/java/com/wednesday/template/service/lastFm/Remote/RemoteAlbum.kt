@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Keep
 @Serializable
-data class Album(
+data class RemoteAlbum(
     @SerialName("artist")
     val artist: String,
     @SerialName("image")

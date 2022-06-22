@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Albummatches(
     @SerialName("album")
-    val album: List<Album>
+    val album: List<RemoteAlbum>
 )
