@@ -1,12 +1,12 @@
 package com.wednesday.template.repo.lastFm.models
 
+import com.wednesday.template.service.lastFm.Remote.AlbumRes
 import com.wednesday.template.service.lastFm.Remote.Albummatches
+import com.wednesday.template.service.lastFm.Remote.Attr
 import com.wednesday.template.service.lastFm.Remote.Image
+import com.wednesday.template.service.lastFm.Remote.OpensearchQuery
 import com.wednesday.template.service.lastFm.Remote.RemoteAlbum
 import com.wednesday.template.service.lastFm.Remote.Results
-import com.wednesday.template.service.lastFm.Remote.Attr
-import com.wednesday.template.service.lastFm.Remote.OpensearchQuery
-import com.wednesday.template.service.lastFm.Remote.AlbumRes
 val imgSmall = Image(
     size = "sSize",
     text = "sText"

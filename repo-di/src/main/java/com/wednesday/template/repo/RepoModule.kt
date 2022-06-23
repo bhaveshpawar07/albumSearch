@@ -38,9 +38,9 @@ val repoModule = module {
 
     // LastFM
 
-    single<DomainAlbumMapper>{DomainAlbumMapperImpl()}
+    single<DomainAlbumMapper> { DomainAlbumMapperImpl() }
 
     single<LastFmRepository> {
-        LastFmRepositoryImpl(get(),get())
+        LastFmRepositoryImpl(get(), get())
     }
 }

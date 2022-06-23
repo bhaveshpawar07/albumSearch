@@ -12,28 +12,25 @@ import kotlin.test.assertEquals
 @OptIn(ExperimentalCoroutinesApi::class)
 class DomainAlbumMapperImplTest {
 
-    private lateinit var domainAlbumMapperImpl : DomainAlbumMapperImpl
+    private lateinit var domainAlbumMapperImpl: DomainAlbumMapperImpl
 
     @Before
-    fun setup(){
+    fun setup() {
         domainAlbumMapperImpl = DomainAlbumMapperImpl()
     }
 
-
     @Test
-    fun `Given a list of remoteAlbum , When map is being called , Then correct album list should be returned`() : Unit =
+    fun `Given a list of remoteAlbum , When map is being called , Then correct album list should be returned`(): Unit =
         runTest {
-            //Given
+            // Given
             val remoteAlbums = listOf(remoteAlbum)
             whenever(domainAlbumMapperImpl.map(remoteAlbums))
                 .thenReturn(listOf(albumMappedFromRemote))
-            //When
+            // When
 
             val result = domainAlbumMapperImpl.map(remoteAlbums)
-            //Then
+            // Then
 
             assertEquals(expected = listOf(albumMappedFromRemote), actual = result)
-
         }
-
 }
