@@ -10,8 +10,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
 @OptIn(ExperimentalSerializationApi::class)
-fun getLastFMRetrofit(context:Context, vararg interceptors : Interceptor):Retrofit{
-
+fun getLastFMRetrofit(context: Context, vararg interceptors: Interceptor): Retrofit {
 
     val okHttpClient = OkHttpClient().newBuilder().run {
         interceptors.forEach {
@@ -20,9 +19,9 @@ fun getLastFMRetrofit(context:Context, vararg interceptors : Interceptor):Retrof
         build()
     }
 
-    val baseUrl="https://ws.audioscrobbler.com/"
+    val baseUrl = "https://ws.audioscrobbler.com/"
     val contentType = "application/json".toMediaType()
-    val json= Json {
+    val json = Json {
         ignoreUnknownKeys = true
         explicitNulls = false
     }
@@ -32,7 +31,4 @@ fun getLastFMRetrofit(context:Context, vararg interceptors : Interceptor):Retrof
         .baseUrl(baseUrl)
         .addConverterFactory(json.asConverterFactory(contentType))
         .build()
-
-
-
 }
