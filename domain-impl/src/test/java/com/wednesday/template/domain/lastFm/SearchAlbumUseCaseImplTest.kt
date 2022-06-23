@@ -1,5 +1,6 @@
 package com.wednesday.template.domain.lastFm
 
+import com.wednesday.template.domain.TestException
 import com.wednesday.template.domain.base.Result
 import com.wednesday.template.domain.lastFm.models.album
 import com.wednesday.template.repo.lastFm.LastFmRepository
@@ -41,6 +42,22 @@ class SearchAlbumUseCaseImplTest {
             // Then
             assertTrue(result is Result.Success)
             verify(lastFmRepository, times(1)).searchAlbum(same(searchString))
+            verifyNoMoreInteractions(lastFmRepository)
+        }
+
+    @Test
+    fun `Given throws expection, When invoke is called , Then Error is returned`():Unit =
+        runTest {
+            //Given
+            val searchString = "Test"
+            val testException = TestException()
+            whenever(lastFmRepository.searchAlbum(searchString))
+                .thenThrow(testException)
+            //When
+            val result = searchAlbumUseCaseImpl(searchString)
+            //Then
+            assertTrue(result is Result.Error)
+            verify(lastFmRepository, times(1)).searchAlbum(searchString)
             verifyNoMoreInteractions(lastFmRepository)
         }
 }
