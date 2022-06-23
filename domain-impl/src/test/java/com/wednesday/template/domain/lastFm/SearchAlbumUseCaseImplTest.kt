@@ -46,16 +46,16 @@ class SearchAlbumUseCaseImplTest {
         }
 
     @Test
-    fun `Given throws expection, When invoke is called , Then Error is returned`():Unit =
+    fun `Given throws expection, When invoke is called , Then Error is returned`(): Unit =
         runTest {
-            //Given
+            // Given
             val searchString = "Test"
             val testException = TestException()
             whenever(lastFmRepository.searchAlbum(searchString))
                 .thenThrow(testException)
-            //When
+            // When
             val result = searchAlbumUseCaseImpl(searchString)
-            //Then
+            // Then
             assertTrue(result is Result.Error)
             verify(lastFmRepository, times(1)).searchAlbum(searchString)
             verifyNoMoreInteractions(lastFmRepository)
