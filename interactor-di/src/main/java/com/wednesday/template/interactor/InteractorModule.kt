@@ -39,5 +39,5 @@ val interactorModule = module {
 
     // Last FM
 
-    single<SearchAlbumInteractor> { SearchAlbumInteractorImpl(get(),get()) }
+    single<SearchAlbumInteractor> { SearchAlbumInteractorImpl(get(), get()) }
 }
