@@ -4,6 +4,8 @@ import com.wednesday.template.domain.base.datetime.ConvertDateToLongUseCase
 import com.wednesday.template.domain.base.datetime.ConvertDateToLongUseCaseImpl
 import com.wednesday.template.domain.base.datetime.FormatDateUseCase
 import com.wednesday.template.domain.base.datetime.FormatDateUseCaseImpl
+import com.wednesday.template.domain.lastFm.SearchAlbumUseCase
+import com.wednesday.template.domain.lastFm.SearchAlbumUseCaseImpl
 import com.wednesday.template.domain.weather.FetchFavouriteCitiesWeatherUseCase
 import com.wednesday.template.domain.weather.FetchFavouriteCitiesWeatherUseCaseImpl
 import com.wednesday.template.domain.weather.GetFavouriteCitiesFlowUseCase
@@ -37,4 +39,7 @@ val domainModule = module {
     single<GetFavouriteCitiesWeatherFlowUseCase> { GetFavouriteCitiesWeatherFlowUseCaseImpl(get()) }
 
     single<FetchFavouriteCitiesWeatherUseCase> { FetchFavouriteCitiesWeatherUseCaseImpl(get()) }
+
+    // LastFm
+    single<SearchAlbumUseCase> { SearchAlbumUseCaseImpl(get()) }
 }
