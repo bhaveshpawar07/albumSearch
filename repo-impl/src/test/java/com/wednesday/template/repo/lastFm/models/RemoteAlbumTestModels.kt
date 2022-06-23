@@ -1,8 +1,12 @@
 package com.wednesday.template.repo.lastFm.models
 
-import com.wednesday.template.domain.lastFm.Album
-import com.wednesday.template.service.lastFm.Remote.*
-
+import com.wednesday.template.service.lastFm.Remote.Albummatches
+import com.wednesday.template.service.lastFm.Remote.Image
+import com.wednesday.template.service.lastFm.Remote.RemoteAlbum
+import com.wednesday.template.service.lastFm.Remote.Results
+import com.wednesday.template.service.lastFm.Remote.Attr
+import com.wednesday.template.service.lastFm.Remote.OpensearchQuery
+import com.wednesday.template.service.lastFm.Remote.AlbumRes
 val imgSmall = Image(
     size = "sSize",
     text = "sText"
@@ -22,8 +26,8 @@ val imgXlarge = Image(
 
 val imageList = mutableListOf<Image>(imgSmall, imgMed, imgLarge, imgXlarge)
 val remoteAlbum = RemoteAlbum(
-    mbid ="a",
-    name ="test",
+    mbid = "a",
+    name = "test",
     artist = "testA",
     url = "testurl",
     image = imageList,
@@ -31,7 +35,7 @@ val remoteAlbum = RemoteAlbum(
 )
 
 val result = Results(
-    albummatches = Albummatches( album = listOf(remoteAlbum)) ,
+    albummatches = Albummatches(album = listOf(remoteAlbum)),
     attr = Attr(forX = ""),
     opensearchItemsPerPage = "",
     opensearchQuery = OpensearchQuery(role = "", searchTerms = "", startPage = "", text = ""),
