@@ -29,7 +29,7 @@ class LastFmRepositoryImplTest {
     }
 
     private fun verifyNoMoreInteractions(){
-        org.mockito.kotlin.verifyNoMoreInteractions(
+        verifyNoMoreInteractions(
             lastFmRemoteService,
             domainAlbumMapper
         )
