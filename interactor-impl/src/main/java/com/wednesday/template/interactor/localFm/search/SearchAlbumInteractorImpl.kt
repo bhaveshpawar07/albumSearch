@@ -14,7 +14,7 @@ class SearchAlbumInteractorImpl(
     private val coroutineContextController: CoroutineContextController
 ) : SearchAlbumInteractor {
 
-    private val searchResultChannel  = Channel<List<Album>> {  }
+    private val searchResultChannel = Channel<List<Album>> { }
 
     override val searchResultsFlow: Flow<List<Album>> = searchResultChannel.receiveAsFlow()
 

@@ -25,48 +25,46 @@ import kotlin.time.ExperimentalTime
 class SearchAlbumInteractorImplTest : InteractorTest() {
     private lateinit var searchAlbumUseCase: SearchAlbumUseCase
     private lateinit var coroutineContextController: CoroutineContextController
-    private lateinit var interactor : SearchAlbumInteractorImpl
+    private lateinit var interactor: SearchAlbumInteractorImpl
 
     @Before
-    fun setUp(){
-        searchAlbumUseCase= mock()
+    fun setUp() {
+        searchAlbumUseCase = mock()
         coroutineContextController = coroutineDispatcherRule.coroutineContextController
     }
 
-    private fun verifyNoMoreInteractions(){
+    private fun verifyNoMoreInteractions() {
         verifyNoMoreInteractions(
             searchAlbumUseCase
         )
     }
 
-    private fun createInteractor(){
-        interactor = SearchAlbumInteractorImpl(searchAlbumUseCase,coroutineContextController)
+    private fun createInteractor() {
+        interactor = SearchAlbumInteractorImpl(searchAlbumUseCase, coroutineContextController)
     }
 
     @Test
-    fun `Given no error occurs, When search called, Then it returns flow list of albums`():Unit =
+    fun `Given no error occurs, When search called, Then it returns flow list of albums`(): Unit =
         runTest {
-            //Given
+            // Given
             val searchTerm = "Test"
             val albumList = listOf(album)
             whenever(searchAlbumUseCase(searchTerm)).thenReturn(Result.Success(albumList))
 
             launchInTestScope {
                 createInteractor()
-            //when
+                // when
                 interactor.searchResultsFlow.test {
                     interactor.search(searchTerm)
 
                     val result = awaitItem()
 
-                    //Then
+                    // Then
                     assertEquals(actual = result, expected = albumList)
                     verify(searchAlbumUseCase, times(1)).invoke(same(searchTerm))
                     verifyNoMoreInteractions()
                     cancelAndIgnoreRemainingEvents()
                 }
             }
-
         }
-
 }
