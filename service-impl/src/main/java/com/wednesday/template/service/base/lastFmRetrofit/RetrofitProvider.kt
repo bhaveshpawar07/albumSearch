@@ -16,7 +16,7 @@ import retrofit2.Retrofit
 fun getLastFMRetrofit(context: Context, vararg interceptors: Interceptor): Retrofit {
     val httpLoggingInterceptor = HttpLoggingInterceptor()
 
-    httpLoggingInterceptor.level = when (BuildConfig.DEBUG){
+    httpLoggingInterceptor.level = when (BuildConfig.DEBUG) {
         true -> HttpLoggingInterceptor.Level.BODY
         false -> HttpLoggingInterceptor.Level.NONE
     }
@@ -26,7 +26,7 @@ fun getLastFMRetrofit(context: Context, vararg interceptors: Interceptor): Retro
             addInterceptor(it)
         }
 
-        if(BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             addInterceptor(
                 ChuckerInterceptor
                     .Builder(context)

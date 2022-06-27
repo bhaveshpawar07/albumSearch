@@ -4,21 +4,19 @@ import androidx.core.widget.addTextChangedListener
 import com.wednesday.template.navigation.search.SearchNavigator
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.effect.Effect
-import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.fragment.BindingProvider
 import com.wednesday.template.presentation.base.fragment.MainFragment
 import com.wednesday.template.presentation.base.list.ListComponent
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
 import com.wednesday.template.presentation.lastFm.list.UIAlbumListRenderer
-import com.wednesday.template.presentation.weather.search.SearchScreen
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LastFmSearchFragment : MainFragment<FragmentSearchBinding,
-        LastFmSearchScreen,
-        LastFmSearchScreenState,
-        SearchNavigator,
-        LastFmSearchViewModel>(){
+    LastFmSearchScreen,
+    LastFmSearchScreenState,
+    SearchNavigator,
+    LastFmSearchViewModel>() {
 
     override val toolbarComponent: ToolbarComponent = ToolbarComponent(this, onBackClicked = {
         viewModel.onIntent(LastFmSearchScreenIntent.Back)
@@ -31,13 +29,11 @@ class LastFmSearchFragment : MainFragment<FragmentSearchBinding,
     override val bindingProvider: BindingProvider<FragmentSearchBinding> =
         FragmentSearchBinding::inflate
 
-
     private val listComponent by component {
-        ListComponent(listViewModel = viewModel , recyclerViewId = R.id.searchRecyclerView){
+        ListComponent(listViewModel = viewModel, recyclerViewId = R.id.searchRecyclerView) {
             addRenderer(UIAlbumListRenderer())
         }
     }
-
 
     override fun onState(screenState: LastFmSearchScreenState) {
         super.onState(screenState)
@@ -56,14 +52,10 @@ class LastFmSearchFragment : MainFragment<FragmentSearchBinding,
         addTextListener(binding)
     }
 
-    private fun addTextListener(binding: FragmentSearchBinding) = with(binding){
+    private fun addTextListener(binding: FragmentSearchBinding) = with(binding) {
 
-        searchEditText.addTextChangedListener{
+        searchEditText.addTextChangedListener {
             it?.let { viewModel.onIntent(LastFmSearchScreenIntent.SearchAlbums(it.toString())) }
         }
-
     }
-
-
-
 }

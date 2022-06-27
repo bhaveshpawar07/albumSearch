@@ -12,7 +12,6 @@ import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
 import com.wednesday.template.presentation.lastFm.LastFmSearchScreen
-import com.wednesday.template.presentation.weather.search.SearchScreen
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
