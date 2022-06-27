@@ -4,7 +4,7 @@ import com.wednesday.template.domain.lastFm.Album
 import com.wednesday.template.interactor.base.Mapper
 import com.wednesday.template.presentation.lastFm.UIAlbum
 
-interface UIAlbumMapper : Mapper<Album , UIAlbum>
+interface UIAlbumMapper : Mapper<Album, UIAlbum>
 
 class UIAlbumMapperImpl : UIAlbumMapper {
     override fun map(from: Album): UIAlbum {
@@ -18,5 +18,4 @@ class UIAlbumMapperImpl : UIAlbumMapper {
             albumCoverXLarge = from.xlImageText
         )
     }
-
 }
