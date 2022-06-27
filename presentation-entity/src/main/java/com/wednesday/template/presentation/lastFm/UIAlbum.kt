@@ -5,5 +5,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UIAlbum(
-    val albumId: String
-) : UIListItemBase(id = "UIAlbum")
+    val albumId: String,
+    val albumName : String,
+    val albumArtist : String,
+    val albumCoverSmall : String,
+    val albumCoverMedium : String,
+    val albumCoverLarge : String,
+    val albumCoverXLarge : String
+
+) : UIListItemBase(id = "UIAlbum $albumId")
