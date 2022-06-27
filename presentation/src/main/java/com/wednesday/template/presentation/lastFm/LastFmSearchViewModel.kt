@@ -1,26 +1,26 @@
 package com.wednesday.template.presentation.lastFm
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.localFm.SearchAlbumInteractor
 import com.wednesday.template.navigation.search.SearchNavigator
-import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIList
-import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
-import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
-import com.wednesday.template.presentation.weather.search.SearchScreen
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.map
+
 import kotlinx.coroutines.launch
 
 class LastFmSearchViewModel(
     private val searchAlbumInteractor: SearchAlbumInteractor
 ) : BaseViewModel<LastFmSearchScreen, LastFmSearchScreenState, SearchNavigator>(), IntentHandler<LastFmSearchScreenIntent> {
 
-    private val searchAlbumResponseMutableStateFlow : MutableStateFlow<String> = MutableStateFlow("")
+    private val searchAlbumResponseMutableStateFlow: MutableStateFlow<String> = MutableStateFlow("")
     override fun getDefaultScreenState(): LastFmSearchScreenState {
         return LastFmSearchScreenState(
             toolbar = UIToolbar(
@@ -70,8 +70,8 @@ class LastFmSearchViewModel(
             .debounce(500)
             .map { it.trim() }
             .onEach {
-                if(it.isBlank()){
-                    setState { copy(searchList = UIList())}
+                if (it.isBlank()) {
+                    setState { copy(searchList = UIList()) }
                     return@onEach
                 }
 
