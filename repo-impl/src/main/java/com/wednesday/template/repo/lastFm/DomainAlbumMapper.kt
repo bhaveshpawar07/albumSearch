@@ -4,9 +4,9 @@ import com.wednesday.template.domain.lastFm.Album
 import com.wednesday.template.repo.util.Mapper
 import com.wednesday.template.service.lastFm.Remote.RemoteAlbum
 
-interface AlbumMapper : Mapper<RemoteAlbum, Album>
+interface DomainAlbumMapper : Mapper<RemoteAlbum, Album>
 
-class AlbumMapperImpl : AlbumMapper {
+class DomainAlbumMapperImpl : DomainAlbumMapper {
 
     override fun map(from: RemoteAlbum): Album {
         return Album(

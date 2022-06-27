@@ -25,4 +25,9 @@ dependencies {
     testImplementation(Dependencies.Test.mockito)
     testImplementation(Dependencies.Test.flowTest)
     testImplementation(Dependencies.Test.coroutines)
+    testImplementation(Dependencies.Test.androidxArchCore)
+    testImplementation(Dependencies.Test.androidxTestRunner)
+    testImplementation(Dependencies.Test.androidxTestRules)
+    testImplementation(Dependencies.Test.androidxExt)
+    testImplementation(Dependencies.Test.androidxCoreTesting)
 }

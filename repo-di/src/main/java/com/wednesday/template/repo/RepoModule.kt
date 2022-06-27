@@ -2,6 +2,8 @@ package com.wednesday.template.repo
 
 import com.wednesday.template.repo.date.DateRepo
 import com.wednesday.template.repo.date.DateRepoImpl
+import com.wednesday.template.repo.lastFm.DomainAlbumMapper
+import com.wednesday.template.repo.lastFm.DomainAlbumMapperImpl
 import com.wednesday.template.repo.lastFm.LastFmRepository
 import com.wednesday.template.repo.lastFm.LastFmRepositoryImpl
 import com.wednesday.template.repo.weather.DomainCityMapper
@@ -15,7 +17,6 @@ import com.wednesday.template.repo.weather.LocalWeatherMapperImpl
 import com.wednesday.template.repo.weather.WeatherRepository
 import com.wednesday.template.repo.weather.WeatherRepositoryImpl
 import org.koin.dsl.module
-import org.koin.dsl.single
 
 val repoModule = module {
 
@@ -36,7 +37,10 @@ val repoModule = module {
     }
 
     // LastFM
+
+    single<DomainAlbumMapper> { DomainAlbumMapperImpl() }
+
     single<LastFmRepository> {
-        LastFmRepositoryImpl(get())
+        LastFmRepositoryImpl(get(), get())
     }
 }
