@@ -7,7 +7,10 @@ import com.wednesday.template.interactor.base.CoroutineContextController
 import com.wednesday.template.interactor.localFm.SearchAlbumInteractor
 import com.wednesday.template.presentation.base.UIList
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 
 class SearchAlbumInteractorImpl(
     private val searchAlbumUseCase: SearchAlbumUseCase,
