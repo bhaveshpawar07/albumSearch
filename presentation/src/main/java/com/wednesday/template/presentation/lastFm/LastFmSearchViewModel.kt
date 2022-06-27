@@ -1,7 +1,5 @@
 package com.wednesday.template.presentation.lastFm
 
-import android.util.Log
-import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.localFm.SearchAlbumInteractor
 import com.wednesday.template.navigation.search.SearchNavigator
 import com.wednesday.template.presentation.base.UIList
@@ -10,21 +8,15 @@ import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
 import com.wednesday.template.presentation.weather.search.SearchScreen
-import com.wednesday.template.presentation.weather.search.SearchScreenIntent
-import com.wednesday.template.presentation.weather.search.SearchScreenState
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
-class LastFmSearchViewModel (
+class LastFmSearchViewModel(
     private val searchAlbumInteractor: SearchAlbumInteractor
-) : BaseViewModel<SearchScreen, AlbumSearchScreenState, SearchNavigator>(),IntentHandler<LastFmSearchScreenIntent>{
-
-
+) : BaseViewModel<SearchScreen, AlbumSearchScreenState, SearchNavigator>(), IntentHandler<LastFmSearchScreenIntent> {
 
     override fun getDefaultScreenState(): AlbumSearchScreenState {
         return AlbumSearchScreenState(
             toolbar = UIToolbar(
-                title = UIText {block("Search")},
+                title = UIText { block("Search") },
                 hasBackButton = true,
                 menuIcon = null
             ),
@@ -49,14 +41,10 @@ class LastFmSearchViewModel (
     }
 
     override fun onIntent(intent: LastFmSearchScreenIntent) {
-        when(intent){
-          is LastFmSearchScreenIntent.SearchAlbums ->{
+        when (intent) {
+            is LastFmSearchScreenIntent.SearchAlbums -> {
 //                searchAlbumInteractor.search("a")
-          }
+            }
         }
     }
-
-
-
-
 }
