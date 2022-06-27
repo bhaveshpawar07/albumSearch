@@ -11,6 +11,7 @@ import com.wednesday.template.presentation.base.UIToolbar
 import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
+import com.wednesday.template.presentation.lastFm.LastFmSearchScreen
 import com.wednesday.template.presentation.weather.search.SearchScreen
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -59,7 +60,8 @@ class HomeViewModel(
     override fun onIntent(intent: HomeScreenIntent) {
         when (intent) {
             is HomeScreenIntent.Search -> {
-                navigator.navigateTo(SearchScreen)
+//                navigator.navigateTo(SearchScreen)
+                navigator.navigateTo(LastFmSearchScreen)
             }
             HomeScreenIntent.Loading -> {
                 setState { copy(showLoading = !showLoading) }

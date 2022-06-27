@@ -1,22 +1,30 @@
 package com.wednesday.template.presentation.lastFm
 
+import android.util.Log
+import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.localFm.SearchAlbumInteractor
 import com.wednesday.template.navigation.search.SearchNavigator
+import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.UIList
+import com.wednesday.template.presentation.base.UIResult
 import com.wednesday.template.presentation.base.UIText
 import com.wednesday.template.presentation.base.UIToolbar
+import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.intent.IntentHandler
 import com.wednesday.template.presentation.base.viewmodel.BaseViewModel
 import com.wednesday.template.presentation.weather.search.SearchScreen
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class LastFmSearchViewModel(
     private val searchAlbumInteractor: SearchAlbumInteractor
-) : BaseViewModel<SearchScreen, AlbumSearchScreenState, SearchNavigator>(), IntentHandler<LastFmSearchScreenIntent> {
+) : BaseViewModel<LastFmSearchScreen, LastFmSearchScreenState, SearchNavigator>(), IntentHandler<LastFmSearchScreenIntent> {
 
-    override fun getDefaultScreenState(): AlbumSearchScreenState {
-        return AlbumSearchScreenState(
+    private val searchAlbumResponseMutableStateFlow : MutableStateFlow<String> = MutableStateFlow("")
+    override fun getDefaultScreenState(): LastFmSearchScreenState {
+        return LastFmSearchScreenState(
             toolbar = UIToolbar(
-                title = UIText { block("Search") },
+                title = UIText { block("Album Search") },
                 hasBackButton = true,
                 menuIcon = null
             ),
@@ -26,25 +34,64 @@ class LastFmSearchViewModel(
     }
 
     override fun onCreate(fromRecreate: Boolean) {
-
-//        viewModelScope.launch {
-//            searchAlbumInteractor.search("Albumname")
-//        }
-//
-//        searchAlbumInteractor.searchResultsFlow
-//            .onEach {
-//                it.forEach {
-//                    Log.e("LastFmSearchViewModel", "onCreate: "+it )
+        searchAlbumInteractor.searchResultsFlow
+            .onEach {
+                setState {
+                    copy(showLoading = false, searchList = it)
+                }
+//                when(it){
+//                    is UIResult.Success ->{
+//                        Log.e("TAG", "onCreate: "+it.data)
+//                        setState {
+//                            copy(showLoading = false, searchList = it.data)
+//                        }
+//                    }
+//                    is UIResult.Error ->{
+//                        Log.e("TAG", "onCreate: "+it.exception)
+//                        setState {
+//                            copy(showLoading = false)
+//                        }
+//                        setEffect(
+//                            ShowSnackbarEffect(
+//                                message = UIText{
+//                                    block(R.string.something_went_wrong)
+//                                }
+//                            )
+//                        )
+//                    }
+//                    else -> {
+//                        Log.e("TAG", "onCreate: "+"Something is wrong")
+//                    }
 //                }
-//
-//            }
+            }
+            .launchIn(viewModelScope)
+
+        searchAlbumResponseMutableStateFlow
+            .debounce(500)
+            .map { it.trim() }
+            .onEach {
+                if(it.isBlank()){
+                    setState { copy(searchList = UIList())}
+                    return@onEach
+                }
+
+                setState {
+                    copy(showLoading = true)
+                }
+                searchAlbumInteractor.search(it)
+            }
+            .launchIn(viewModelScope)
     }
 
     override fun onIntent(intent: LastFmSearchScreenIntent) {
         when (intent) {
             is LastFmSearchScreenIntent.SearchAlbums -> {
-//                searchAlbumInteractor.search("a")
+                viewModelScope.launch {
+//                    searchAlbumInteractor.search(intent.album)
+                    searchAlbumResponseMutableStateFlow.value = intent.album
+                }
             }
+            LastFmSearchScreenIntent.Back -> navigator.back()
         }
     }
 }

@@ -6,7 +6,7 @@ import com.wednesday.template.presentation.screen.MainScreenState
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class AlbumSearchScreenState(
+data class LastFmSearchScreenState(
     override val toolbar: UIToolbar,
     override val showLoading: Boolean,
     var searchList: UIList

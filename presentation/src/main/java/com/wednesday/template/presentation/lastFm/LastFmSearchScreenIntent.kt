@@ -6,4 +6,6 @@ sealed interface LastFmSearchScreenIntent : Intent {
     data class SearchAlbums(
         val album: String
     ) : LastFmSearchScreenIntent
+
+    object Back : LastFmSearchScreenIntent
 }
