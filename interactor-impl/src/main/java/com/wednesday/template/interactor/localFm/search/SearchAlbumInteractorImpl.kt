@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.map
 class SearchAlbumInteractorImpl(
     private val searchAlbumUseCase: SearchAlbumUseCase,
     private val coroutineContextController: CoroutineContextController,
-    private val uiAlbumMapperImpl: UIAlbumMapperImpl
+    private val uiAlbumMapper: UIAlbumMapper
 ) : SearchAlbumInteractor {
 
     private val searchResultChannel = Channel<List<Album>> { }
@@ -23,7 +23,7 @@ class SearchAlbumInteractorImpl(
     override val searchResultsFlow: Flow<UIList> = searchResultChannel
         .consumeAsFlow()
         .map {
-            UIList(uiAlbumMapperImpl.map(it))
+            UIList(uiAlbumMapper.map(it))
         }
         .flowOn(coroutineContextController.dispatcherDefault)
 //        .catch { e ->
