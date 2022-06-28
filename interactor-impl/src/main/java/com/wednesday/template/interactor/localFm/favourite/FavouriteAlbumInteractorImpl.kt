@@ -1,6 +1,5 @@
 package com.wednesday.template.interactor.localFm.favourite
 
-import android.util.Log
 import com.wednesday.template.domain.lastFm.GetFavouriteAlbumFlowUseCase
 import com.wednesday.template.domain.lastFm.GetFavouriteAlbumUseCase
 import com.wednesday.template.domain.lastFm.RemoveAlbumFavouriteUseCase
@@ -21,14 +20,14 @@ class FavouriteAlbumInteractorImpl(
     private val getFavouriteAlbumUseCase: GetFavouriteAlbumUseCase,
     private val getFavouriteAlbumFlowUseCase: GetFavouriteAlbumFlowUseCase,
     private val controller: CoroutineContextController,
-    private val albumMapper: UIAlbumMapper) : BaseInteractor(),FavouriteAlbumInteractor {
+    private val albumMapper: UIAlbumMapper
+) : BaseInteractor(), FavouriteAlbumInteractor {
 
     override suspend fun setFavouriteAlbum(uiAlbum: UIAlbum): UIResult<Unit> =
         controller.switchToDefault {
             val album = albumMapper.mapToAlbum(uiAlbum)
             setAlbumFavouriteUseCase(album).let(::mapResult)
         }
-
 
     override suspend fun removeFavouriteAlbum(uiAlbum: UIAlbum): UIResult<Unit> =
         controller.switchToDefault {
@@ -48,6 +47,5 @@ class FavouriteAlbumInteractorImpl(
                 }
             })
             .flowOn(controller.dispatcherDefault)
-
     }
 }

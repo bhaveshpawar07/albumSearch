@@ -1,13 +1,12 @@
 package com.wednesday.template.interactor.localFm.search
 
 import com.wednesday.template.domain.lastFm.Album
-import com.wednesday.template.interactor.base.Mapper
 import com.wednesday.template.interactor.base.Mapper2
 import com.wednesday.template.presentation.lastFm.UIAlbum
 
-interface UIAlbumMapper : Mapper2<Album,Boolean, UIAlbum>{
-    fun mapToAlbum(from: UIAlbum):Album
-    fun mapFavAlbum(from: Album):UIAlbum
+interface UIAlbumMapper : Mapper2<Album, Boolean, UIAlbum> {
+    fun mapToAlbum(from: UIAlbum): Album
+    fun mapFavAlbum(from: Album): UIAlbum
 }
 
 class UIAlbumMapperImpl : UIAlbumMapper {
@@ -29,7 +28,7 @@ class UIAlbumMapperImpl : UIAlbumMapper {
         )
     }
 
-    override fun map(from1: Album, from2:Boolean): UIAlbum {
+    override fun map(from1: Album, from2: Boolean): UIAlbum {
         return UIAlbum(
             albumId = from1.mbid,
             albumName = from1.name,
@@ -56,5 +55,4 @@ class UIAlbumMapperImpl : UIAlbumMapper {
             isFav = true
         )
     }
-
 }

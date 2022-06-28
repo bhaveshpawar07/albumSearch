@@ -1,6 +1,5 @@
 package com.wednesday.template.interactor.localFm.search
 
-import android.util.Log
 import com.wednesday.template.domain.base.Result
 import com.wednesday.template.domain.lastFm.Album
 import com.wednesday.template.domain.lastFm.GetFavouriteAlbumFlowUseCase
@@ -10,7 +9,10 @@ import com.wednesday.template.interactor.localFm.SearchAlbumInteractor
 import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIResult
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.receiveAsFlow
 
 class SearchAlbumInteractorImpl(
     private val searchAlbumUseCase: SearchAlbumUseCase,
@@ -32,19 +34,19 @@ class SearchAlbumInteractorImpl(
 //        }
 
     override val searchResultsFlow: Flow<UIResult<UIList>> = favouriteAlbumFlowUseCase(Unit)
-        .combine(searchResultChannel.receiveAsFlow()){ favouriteAlbum,searchResult ->
+        .combine(searchResultChannel.receiveAsFlow()) { favouriteAlbum, searchResult ->
             when {
                 searchResult.isEmpty() -> {
                     UIResult.Success(
                         UIList()
                     )
                 }
-                favouriteAlbum is Result.Success ->{
+                favouriteAlbum is Result.Success -> {
                     UIResult.Success(
-                        uiAlbumSearchMapper.map(favouriteAlbum.data,searchResult)
+                        uiAlbumSearchMapper.map(favouriteAlbum.data, searchResult)
                     )
                 }
-                favouriteAlbum is Result.Error ->{
+                favouriteAlbum is Result.Error -> {
                     UIResult.Error(favouriteAlbum.exception)
                 }
                 else -> {
@@ -53,7 +55,6 @@ class SearchAlbumInteractorImpl(
             }
         }
         .flowOn(coroutineContextController.dispatcherDefault)
-
 
     override suspend fun search(searchTerm: String): Unit = coroutineContextController.switchToDefault {
         val list = when (val albumResult = searchAlbumUseCase(searchTerm)) {
