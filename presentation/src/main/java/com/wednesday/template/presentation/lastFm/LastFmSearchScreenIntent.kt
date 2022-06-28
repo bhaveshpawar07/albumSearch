@@ -7,5 +7,8 @@ sealed interface LastFmSearchScreenIntent : Intent {
         val album: String
     ) : LastFmSearchScreenIntent
 
+    data class ToggleFav(
+        val album: UIAlbum
+    ) : LastFmSearchScreenIntent
     object Back : LastFmSearchScreenIntent
 }

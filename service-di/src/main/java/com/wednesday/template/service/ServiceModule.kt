@@ -1,13 +1,17 @@
 package com.wednesday.template.service
 
 import com.wednesday.template.service.base.getRoomDatabase
-import com.wednesday.template.service.base.lastFmRetrofit.getLastFMRetrofit
-import com.wednesday.template.service.base.lastFmRetrofit.interceptors.LastFMApiKeyInterceptor
+import com.wednesday.template.service.base.lastFm.getLastFMRetrofit
+import com.wednesday.template.service.base.lastFm.getLastFmRoomDatabase
+import com.wednesday.template.service.base.lastFm.interceptors.LastFMApiKeyInterceptor
 import com.wednesday.template.service.base.retrofit.getOpenWeatherRetrofit
 import com.wednesday.template.service.base.retrofit.interceptors.OpenWeatherApiKeyInterceptor
+import com.wednesday.template.service.lastFm.LastFmLocalService
+import com.wednesday.template.service.lastFm.LastFmLocalServiceImpl
 import com.wednesday.template.service.lastFm.LastFmRemoteService
 import com.wednesday.template.service.openWeather.OpenWeatherLocalServiceImpl
 import com.wednesday.template.service.room.AndroidTemplateDatabase
+import com.wednesday.template.service.room.LastFmDatabase
 import com.wednesday.template.service.weather.OpenWeatherLocalService
 import com.wednesday.template.service.weather.OpenWeatherRemoteService
 import org.koin.core.qualifier.named
@@ -36,6 +40,11 @@ val serviceModule = module {
 
     // lastFm retrofit object
     single { getLastFmRemoteService(get(named("LastFmRetrofit"))) }
+
+    // lastFm room
+    single { getLastFmRoomDatabase(get())}
+
+    single<LastFmLocalService> { getLastFmLocalService(get())}
 }
 
 fun getWeatherLocalService(database: AndroidTemplateDatabase): OpenWeatherLocalServiceImpl {
@@ -48,4 +57,8 @@ fun getWeatherRemoteService(retrofit: Retrofit): OpenWeatherRemoteService {
 
 fun getLastFmRemoteService(retrofit: Retrofit): LastFmRemoteService {
     return retrofit.create(LastFmRemoteService::class.java)
+}
+
+fun getLastFmLocalService(database : LastFmDatabase) : LastFmLocalServiceImpl{
+    return database.databaseDao()
 }

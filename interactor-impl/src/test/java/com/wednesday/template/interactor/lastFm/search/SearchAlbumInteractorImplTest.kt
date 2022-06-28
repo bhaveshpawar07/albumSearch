@@ -2,12 +2,14 @@ package com.wednesday.template.interactor.lastFm.search
 
 import app.cash.turbine.test
 import com.wednesday.template.domain.base.Result
+import com.wednesday.template.domain.lastFm.GetFavouriteAlbumFlowUseCase
 import com.wednesday.template.domain.lastFm.SearchAlbumUseCase
 import com.wednesday.template.interactor.base.CoroutineContextController
 import com.wednesday.template.interactor.base.InteractorTest
 import com.wednesday.template.interactor.lastFm.search.model.album
 import com.wednesday.template.interactor.localFm.search.SearchAlbumInteractorImpl
 import com.wednesday.template.interactor.localFm.search.UIAlbumMapperImpl
+import com.wednesday.template.interactor.localFm.search.UIAlbumSearchMapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -27,12 +29,16 @@ class SearchAlbumInteractorImplTest : InteractorTest() {
     private lateinit var coroutineContextController: CoroutineContextController
     private lateinit var interactor: SearchAlbumInteractorImpl
     private lateinit var uiAlbumMapperImpl: UIAlbumMapperImpl
+    private lateinit var uiAlbumSearchMapper: UIAlbumSearchMapper
+    private lateinit var favouriteAlbumFlowUseCase: GetFavouriteAlbumFlowUseCase
 
     @Before
     fun setUp() {
         searchAlbumUseCase = mock()
         coroutineContextController = coroutineDispatcherRule.coroutineContextController
         uiAlbumMapperImpl = mock()
+        uiAlbumSearchMapper = mock()
+        favouriteAlbumFlowUseCase = mock()
     }
 
     private fun verifyNoMoreInteractions() {
@@ -42,7 +48,7 @@ class SearchAlbumInteractorImplTest : InteractorTest() {
     }
 
     private fun createInteractor() {
-        interactor = SearchAlbumInteractorImpl(searchAlbumUseCase, coroutineContextController, uiAlbumMapperImpl)
+        interactor = SearchAlbumInteractorImpl(searchAlbumUseCase, coroutineContextController, uiAlbumSearchMapper, favouriteAlbumFlowUseCase)
     }
 
     @Test
