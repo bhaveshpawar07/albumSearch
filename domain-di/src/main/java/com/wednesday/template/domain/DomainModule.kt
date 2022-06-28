@@ -42,12 +42,11 @@ val domainModule = module {
     // LastFm
     single<SearchAlbumUseCase> { SearchAlbumUseCaseImpl(get()) }
 
-    single<GetFavouriteAlbumFlowUseCase> {GetFavouriteAlbumFlowUseCaseImpl(get())}
+    single<GetFavouriteAlbumFlowUseCase> { GetFavouriteAlbumFlowUseCaseImpl(get()) }
 
-    single<GetFavouriteAlbumUseCase> {GetFavouriteAlbumUseCaseImpl(get())}
+    single<GetFavouriteAlbumUseCase> { GetFavouriteAlbumUseCaseImpl(get()) }
 
-    single<SetAlbumFavouriteUseCase> {SetAlbumFavouriteUseCaseImpl(get())}
+    single<SetAlbumFavouriteUseCase> { SetAlbumFavouriteUseCaseImpl(get()) }
 
-    single<RemoveAlbumFavouriteUseCase> {RemoveAlbumFavouriteUseCaseImpl(get())}
-
+    single<RemoveAlbumFavouriteUseCase> { RemoveAlbumFavouriteUseCaseImpl(get()) }
 }
