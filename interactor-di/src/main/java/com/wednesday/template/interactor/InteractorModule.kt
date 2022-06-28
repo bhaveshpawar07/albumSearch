@@ -7,7 +7,11 @@ import com.wednesday.template.interactor.base.datetime.UIDateMapperImpl
 import com.wednesday.template.interactor.localFm.FavouriteAlbumInteractor
 import com.wednesday.template.interactor.localFm.SearchAlbumInteractor
 import com.wednesday.template.interactor.localFm.favourite.FavouriteAlbumInteractorImpl
-import com.wednesday.template.interactor.localFm.search.*
+import com.wednesday.template.interactor.localFm.search.SearchAlbumInteractorImpl
+import com.wednesday.template.interactor.localFm.search.UIAlbumMapper
+import com.wednesday.template.interactor.localFm.search.UIAlbumMapperImpl
+import com.wednesday.template.interactor.localFm.search.UIAlbumSearchMapper
+import com.wednesday.template.interactor.localFm.search.UIAlbumSearchMapperImpl
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.interactor.weather.UICityMapper
@@ -43,9 +47,9 @@ val interactorModule = module {
 
     single<UIAlbumMapper> { UIAlbumMapperImpl() }
 
-    single<UIAlbumSearchMapper> {UIAlbumSearchMapperImpl(get())}
+    single<UIAlbumSearchMapper> { UIAlbumSearchMapperImpl(get()) }
 
-    factory<SearchAlbumInteractor> { SearchAlbumInteractorImpl(get(), get(), get(),get()) }
+    factory<SearchAlbumInteractor> { SearchAlbumInteractorImpl(get(), get(), get(), get()) }
 
-    factory<FavouriteAlbumInteractor> { FavouriteAlbumInteractorImpl(get(),get(),get(),get(),get(),get())}
+    factory<FavouriteAlbumInteractor> { FavouriteAlbumInteractorImpl(get(), get(), get(), get(), get(), get()) }
 }
