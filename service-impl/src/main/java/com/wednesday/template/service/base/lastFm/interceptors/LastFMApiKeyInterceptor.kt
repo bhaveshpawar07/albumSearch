@@ -1,4 +1,4 @@
-package com.wednesday.template.service.base.lastFmRetrofit.interceptors
+package com.wednesday.template.service.base.lastFm.interceptors
 
 import com.wednesday.template.service.impl.BuildConfig
 import okhttp3.Interceptor

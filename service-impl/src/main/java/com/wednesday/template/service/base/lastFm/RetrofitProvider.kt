@@ -1,4 +1,4 @@
-package com.wednesday.template.service.base.lastFmRetrofit
+package com.wednesday.template.service.base.lastFm
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
