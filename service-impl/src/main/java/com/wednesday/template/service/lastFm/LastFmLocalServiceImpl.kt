@@ -1,6 +1,10 @@
 package com.wednesday.template.service.lastFm
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.wednesday.template.service.lastFm.Local.LocalAlbumDetails
 import kotlinx.coroutines.flow.Flow
 

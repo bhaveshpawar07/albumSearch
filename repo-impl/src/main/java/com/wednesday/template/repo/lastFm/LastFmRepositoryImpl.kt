@@ -1,6 +1,5 @@
 package com.wednesday.template.repo.lastFm
 
-import android.util.Log
 import com.wednesday.template.domain.lastFm.Album
 import com.wednesday.template.service.lastFm.LastFmLocalService
 import com.wednesday.template.service.lastFm.LastFmRemoteService
@@ -9,10 +8,10 @@ import kotlinx.coroutines.flow.map
 
 class LastFmRepositoryImpl(
     private val lastFmRemoteService: LastFmRemoteService,
-    private val domainAlbumMapper: DomainAlbumMapper ,
+    private val domainAlbumMapper: DomainAlbumMapper,
     private val lastFmLocalService: LastFmLocalService,
     private val localAlbumMapper: LocalAlbumMapper
-    ) : LastFmRepository {
+) : LastFmRepository {
 
     override suspend fun searchAlbum(albumName: String): List<Album> = domainAlbumMapper.map(lastFmRemoteService.albumSearch(albumName).results.albummatches.album)
 

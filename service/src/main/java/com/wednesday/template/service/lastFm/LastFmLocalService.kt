@@ -9,7 +9,7 @@ interface LastFmLocalService {
 
     suspend fun deleteAlbumAsFavourite(album: LocalAlbumDetails)
 
-    suspend fun getFavouriteAlbum():List<LocalAlbumDetails>
+    suspend fun getFavouriteAlbum(): List<LocalAlbumDetails>
 
-    fun getFavouriteAlbumFlow():Flow<List<LocalAlbumDetails>>
+    fun getFavouriteAlbumFlow(): Flow<List<LocalAlbumDetails>>
 }

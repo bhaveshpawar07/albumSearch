@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room.databaseBuilder
 import com.wednesday.template.service.room.LastFmDatabase
 
-fun getLastFmRoomDatabase(applicationContext: Context) : LastFmDatabase{
+fun getLastFmRoomDatabase(applicationContext: Context): LastFmDatabase {
     return databaseBuilder(
         applicationContext,
         LastFmDatabase::class.java,

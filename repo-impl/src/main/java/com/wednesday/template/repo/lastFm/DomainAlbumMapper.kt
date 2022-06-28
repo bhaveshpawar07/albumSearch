@@ -5,9 +5,9 @@ import com.wednesday.template.repo.util.Mapper
 import com.wednesday.template.service.lastFm.Local.LocalAlbumDetails
 import com.wednesday.template.service.lastFm.Remote.RemoteAlbum
 
-interface DomainAlbumMapper : Mapper<RemoteAlbum, Album>{
-   fun mapLocalAlbum(from: LocalAlbumDetails):Album
-   fun mapLocalAlbum(from: List<LocalAlbumDetails>):List<Album>  = from.map(::mapLocalAlbum)
+interface DomainAlbumMapper : Mapper<RemoteAlbum, Album> {
+    fun mapLocalAlbum(from: LocalAlbumDetails): Album
+    fun mapLocalAlbum(from: List<LocalAlbumDetails>): List<Album> = from.map(::mapLocalAlbum)
 }
 class DomainAlbumMapperImpl : DomainAlbumMapper {
 

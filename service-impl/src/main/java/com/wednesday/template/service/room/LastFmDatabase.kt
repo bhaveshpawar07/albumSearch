@@ -10,6 +10,6 @@ import com.wednesday.template.service.lastFm.Local.LocalAlbumDetails
     version = 1
 )
 
-abstract class LastFmDatabase : RoomDatabase(){
-    abstract fun databaseDao():LastFmLocalServiceImpl
+abstract class LastFmDatabase : RoomDatabase() {
+    abstract fun databaseDao(): LastFmLocalServiceImpl
 }
