@@ -7,7 +7,6 @@ import com.wednesday.template.presentation.base.effect.Effect
 import com.wednesday.template.presentation.base.fragment.BindingProvider
 import com.wednesday.template.presentation.base.fragment.MainFragment
 import com.wednesday.template.presentation.base.list.ListComponent
-import com.wednesday.template.presentation.base.snackbar.SnackbarComponent
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
 import com.wednesday.template.presentation.lastFm.list.UIAlbumListRenderer
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
@@ -42,7 +41,7 @@ class LastFmSearchFragment : MainFragment<FragmentSearchBinding,
     }
 
     override fun onEffect(effect: Effect) {
-       unhandledEffect(effect)
+        unhandledEffect(effect)
     }
 
     override fun onViewCreated(binding: FragmentSearchBinding) {
