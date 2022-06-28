@@ -29,6 +29,7 @@ class SearchCityInteractorImpl(
     override val searchResultsFlow: Flow<UIResult<UIList>> = favouriteCitiesFlowUseCase(Unit)
         .combine(searchResultStateFlow.receiveAsFlow()) { favouriteCities, searchResults ->
             when {
+
                 searchResults.isEmpty() -> {
                     UIResult.Success(UIList())
                 }

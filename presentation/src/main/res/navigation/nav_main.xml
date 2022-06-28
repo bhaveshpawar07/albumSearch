@@ -8,11 +8,18 @@
         android:name="com.wednesday.template.presentation.weather.search.SearchFragment"
         android:label="SearchFragment" />
     <fragment
+        android:id="@+id/lastFMsearchFragment"
+        android:name="com.wednesday.template.presentation.lastFm.LastFmSearchFragment"
+        android:label="AlbumSearchFragment" />
+    <fragment
         android:id="@+id/startFragment"
         android:name="com.wednesday.template.presentation.weather.home.HomeFragment"
         android:label="StartFragment" >
         <action
             android:id="@+id/action_startFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_lastFmSearchFragment"
+            app:destination="@id/lastFMsearchFragment" />
     </fragment>
 </navigation>

@@ -6,6 +6,7 @@ import com.wednesday.template.interactor.base.datetime.UIDateMapper
 import com.wednesday.template.interactor.base.datetime.UIDateMapperImpl
 import com.wednesday.template.interactor.localFm.SearchAlbumInteractor
 import com.wednesday.template.interactor.localFm.search.SearchAlbumInteractorImpl
+import com.wednesday.template.interactor.localFm.search.UIAlbumMapperImpl
 import com.wednesday.template.interactor.weather.FavouriteWeatherInteractor
 import com.wednesday.template.interactor.weather.SearchCityInteractor
 import com.wednesday.template.interactor.weather.UICityMapper
@@ -39,5 +40,6 @@ val interactorModule = module {
 
     // Last FM
 
-    single<SearchAlbumInteractor> { SearchAlbumInteractorImpl(get(), get()) }
+    single { UIAlbumMapperImpl() }
+    factory<SearchAlbumInteractor> { SearchAlbumInteractorImpl(get(), get(), get()) }
 }

@@ -10,6 +10,7 @@ import com.wednesday.template.service.openWeather.OpenWeatherLocalServiceImpl
 import com.wednesday.template.service.room.AndroidTemplateDatabase
 import com.wednesday.template.service.weather.OpenWeatherLocalService
 import com.wednesday.template.service.weather.OpenWeatherRemoteService
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -31,10 +32,10 @@ val serviceModule = module {
     // Retrofit lastFm
     factory { LastFMApiKeyInterceptor() }
 
-    single { getLastFMRetrofit(get(), get<LastFMApiKeyInterceptor>()) }
+    single(named("LastFmRetrofit")) { getLastFMRetrofit(get(), get<LastFMApiKeyInterceptor>()) }
 
     // lastFm retrofit object
-    single { getLastFmRemoteService(get()) }
+    single { getLastFmRemoteService(get(named("LastFmRetrofit"))) }
 }
 
 fun getWeatherLocalService(database: AndroidTemplateDatabase): OpenWeatherLocalServiceImpl {
