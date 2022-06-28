@@ -41,9 +41,7 @@ class LastFmSearchFragment : MainFragment<FragmentSearchBinding,
     }
 
     override fun onEffect(effect: Effect) {
-//        when(effect){
-//
-//        }
+           unhandledEffect(effect)
     }
 
     override fun onViewCreated(binding: FragmentSearchBinding) {
