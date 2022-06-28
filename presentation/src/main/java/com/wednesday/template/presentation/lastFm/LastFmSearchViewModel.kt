@@ -1,6 +1,5 @@
 package com.wednesday.template.presentation.lastFm
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.wednesday.template.interactor.localFm.FavouriteAlbumInteractor
 import com.wednesday.template.interactor.localFm.SearchAlbumInteractor
@@ -44,19 +43,19 @@ class LastFmSearchViewModel(
 //                setState {
 //                    copy(showLoading = false, searchList = it)
 //                }
-                when(it){
-                    is UIResult.Success ->{
+                when (it) {
+                    is UIResult.Success -> {
                         setState {
                             copy(showLoading = false, searchList = it.data)
                         }
                     }
-                    is UIResult.Error ->{
+                    is UIResult.Error -> {
                         setState {
                             copy(showLoading = false)
                         }
                         setEffect(
                             ShowSnackbarEffect(
-                                message = UIText{
+                                message = UIText {
                                     block(R.string.something_went_wrong)
                                 }
                             )
@@ -65,7 +64,7 @@ class LastFmSearchViewModel(
                     else -> {
                         setEffect(
                             ShowSnackbarEffect(
-                                message = UIText{
+                                message = UIText {
                                     block(R.string.something_went_wrong)
                                 }
                             )
@@ -102,9 +101,9 @@ class LastFmSearchViewModel(
             }
             is LastFmSearchScreenIntent.ToggleFav -> {
                 viewModelScope.launch {
-                    if (intent.album.isFav){
+                    if (intent.album.isFav) {
                         favouriteAlbumInteractor.removeFavouriteAlbum(intent.album)
-                    }else{
+                    } else {
                         favouriteAlbumInteractor.setFavouriteAlbum(intent.album)
                     }
                 }

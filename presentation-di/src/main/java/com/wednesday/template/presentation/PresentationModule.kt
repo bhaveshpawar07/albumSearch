@@ -11,5 +11,5 @@ val presentationModule = module {
 
     viewModel { HomeViewModel(get()) }
 
-    viewModel { LastFmSearchViewModel(get(),get()) }
+    viewModel { LastFmSearchViewModel(get(), get()) }
 }
