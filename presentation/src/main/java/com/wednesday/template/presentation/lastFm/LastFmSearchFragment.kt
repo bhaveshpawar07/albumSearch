@@ -4,9 +4,11 @@ import androidx.core.widget.addTextChangedListener
 import com.wednesday.template.navigation.search.SearchNavigator
 import com.wednesday.template.presentation.R
 import com.wednesday.template.presentation.base.effect.Effect
+import com.wednesday.template.presentation.base.effect.ShowSnackbarEffect
 import com.wednesday.template.presentation.base.fragment.BindingProvider
 import com.wednesday.template.presentation.base.fragment.MainFragment
 import com.wednesday.template.presentation.base.list.ListComponent
+import com.wednesday.template.presentation.base.snackbar.SnackbarComponent
 import com.wednesday.template.presentation.base.toolbar.ToolbarComponent
 import com.wednesday.template.presentation.lastFm.list.UIAlbumListRenderer
 import com.wednesday.template.resources.databinding.FragmentSearchBinding
@@ -35,13 +37,20 @@ class LastFmSearchFragment : MainFragment<FragmentSearchBinding,
         }
     }
 
+    private val snackbarComponent by component{
+        SnackbarComponent(this)
+    }
+
     override fun onState(screenState: LastFmSearchScreenState) {
         super.onState(screenState)
         listComponent.setData(screenState.searchList)
     }
 
     override fun onEffect(effect: Effect) {
-        unhandledEffect(effect)
+        when(effect){
+            is ShowSnackbarEffect -> snackbarComponent.setData(data = effect)
+            else -> unhandledEffect(effect)
+        }
     }
 
     override fun onViewCreated(binding: FragmentSearchBinding) {
