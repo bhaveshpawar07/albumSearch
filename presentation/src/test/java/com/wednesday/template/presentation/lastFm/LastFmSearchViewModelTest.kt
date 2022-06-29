@@ -24,102 +24,97 @@ class LastFmSearchViewModelTest : BaseViewModelTest() {
     private lateinit var searchInteractor: SearchAlbumInteractor
     private lateinit var navigator: SearchNavigator
     private lateinit var viewModel: LastFmSearchViewModel
-    private lateinit var searchIntent : LastFmSearchScreenIntent
+    private lateinit var searchIntent: LastFmSearchScreenIntent
     override fun before() {
         interactor = mock()
         searchInteractor = mock()
         navigator = mock()
-        viewModel = LastFmSearchViewModel(searchInteractor,interactor)
+        viewModel = LastFmSearchViewModel(searchInteractor, interactor)
     }
 
     override fun after() = Unit
 
     @Test
-    fun `Given _, When onCreate , Then searchResultsFlow was called`() : Unit =
+    fun `Given _, When onCreate , Then searchResultsFlow was called`(): Unit =
         runTest {
-            //Given
+            // Given
             val fromRecreate = false
             whenever(searchInteractor.searchResultsFlow)
                 .thenReturn(flowOf())
 
-            //When
+            // When
             viewModel.onCreate(fromRecreate)
 
-            //Then
+            // Then
             advanceUntilIdle()
             verify(searchInteractor, times(1)).searchResultsFlow
         }
 
     @Test
-    fun `Given _, When searchAlbum intent , Then searchAlbumResponseMutableStateFlow gets a value and  searchResultsFlow is called`() : Unit =
+    fun `Given _, When searchAlbum intent , Then searchAlbumResponseMutableStateFlow gets a value and  searchResultsFlow is called`(): Unit =
         runTest {
-            //Given
+            // Given
             val searchTerm = "test"
             whenever(searchInteractor.search(searchTerm))
                 .thenReturn(Unit)
 
-            //When
+            // When
             viewModel.onCreate(false)
             viewModel.onIntent(LastFmSearchScreenIntent.SearchAlbums(searchTerm))
 
-            //Then
+            // Then
             advanceUntilIdle()
             verify(searchInteractor, times(1)).search(searchTerm)
-
         }
 
     @Test
-    fun `Given _, When searchAlbum intent with mulitple inputs , Then searchAlbumResponseMutableStateFlow gets a value and  searchResultsFlow is called for the last input received`() : Unit =
+    fun `Given _, When searchAlbum intent with mulitple inputs , Then searchAlbumResponseMutableStateFlow gets a value and  searchResultsFlow is called for the last input received`(): Unit =
         runTest {
-            //Given
+            // Given
             val searchTerm = "test"
             val searchTerm1 = "test1"
             val searchTerm2 = "test2"
             whenever(searchInteractor.search(searchTerm))
                 .thenReturn(Unit)
 
-            //When
+            // When
             viewModel.onCreate(false)
             viewModel.onIntent(LastFmSearchScreenIntent.SearchAlbums(searchTerm))
             viewModel.onIntent(LastFmSearchScreenIntent.SearchAlbums(searchTerm1))
             viewModel.onIntent(LastFmSearchScreenIntent.SearchAlbums(searchTerm2))
 
-            //Then
+            // Then
             advanceUntilIdle()
             verify(searchInteractor, times(1)).search(searchTerm2)
-
         }
 
     @Test
-    fun `Given _, When toggleFav intent with new album , Then album is added to favourite`() : Unit =
+    fun `Given _, When toggleFav intent with new album , Then album is added to favourite`(): Unit =
         runTest {
-            //Given
+            // Given
             whenever(interactor.setFavouriteAlbum(album))
                 .thenReturn(UIResult.Success(Unit))
 
-            //When
+            // When
             viewModel.onIntent(LastFmSearchScreenIntent.ToggleFav(album))
 
-            //Then
+            // Then
             advanceUntilIdle()
             verify(interactor, times(1)).setFavouriteAlbum(album)
-
         }
 
     @Test
-    fun `Given _, When toggleFav intent with fav album , Then album is removed from favourite`() : Unit =
+    fun `Given _, When toggleFav intent with fav album , Then album is removed from favourite`(): Unit =
         runTest {
-            //Given
+            // Given
             whenever(interactor.removeFavouriteAlbum(favAlbum))
                 .thenReturn(UIResult.Success(Unit))
 
-            //When
+            // When
             viewModel.onIntent(LastFmSearchScreenIntent.ToggleFav(favAlbum))
 
-            //Then
+            // Then
             advanceUntilIdle()
             verify(interactor, times(1)).removeFavouriteAlbum(favAlbum)
-
         }
-
 }

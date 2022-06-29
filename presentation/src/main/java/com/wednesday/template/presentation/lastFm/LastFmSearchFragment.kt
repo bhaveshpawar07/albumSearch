@@ -37,7 +37,7 @@ class LastFmSearchFragment : MainFragment<FragmentSearchBinding,
         }
     }
 
-    private val snackbarComponent by component{
+    private val snackbarComponent by component {
         SnackbarComponent(this)
     }
 
@@ -47,7 +47,7 @@ class LastFmSearchFragment : MainFragment<FragmentSearchBinding,
     }
 
     override fun onEffect(effect: Effect) {
-        when(effect){
+        when (effect) {
             is ShowSnackbarEffect -> snackbarComponent.setData(data = effect)
             else -> unhandledEffect(effect)
         }
