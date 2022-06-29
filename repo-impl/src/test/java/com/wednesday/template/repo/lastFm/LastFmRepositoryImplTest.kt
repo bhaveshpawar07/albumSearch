@@ -32,8 +32,8 @@ class LastFmRepositoryImplTest {
         lastFmRemoteService = mock()
         domainAlbumMapper = mock()
         localAlbumMapper = mock()
-        lastFmLocalService =mock()
-        lastFmRepositoryImpl = LastFmRepositoryImpl(lastFmRemoteService, domainAlbumMapper,lastFmLocalService,localAlbumMapper)
+        lastFmLocalService = mock()
+        lastFmRepositoryImpl = LastFmRepositoryImpl(lastFmRemoteService, domainAlbumMapper, lastFmLocalService, localAlbumMapper)
     }
 
     private fun verifyNoMoreInteractions() {

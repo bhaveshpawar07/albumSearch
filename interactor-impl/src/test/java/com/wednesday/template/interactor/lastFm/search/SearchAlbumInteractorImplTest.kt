@@ -11,7 +11,6 @@ import com.wednesday.template.interactor.lastFm.search.model.uiAlbum
 import com.wednesday.template.interactor.localFm.search.SearchAlbumInteractorImpl
 import com.wednesday.template.interactor.localFm.search.UIAlbumMapper
 import com.wednesday.template.interactor.localFm.search.UIAlbumSearchMapper
-import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
@@ -25,10 +24,8 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.time.ExperimentalTime
-
 
 @ExperimentalTime
 @ExperimentalCoroutinesApi

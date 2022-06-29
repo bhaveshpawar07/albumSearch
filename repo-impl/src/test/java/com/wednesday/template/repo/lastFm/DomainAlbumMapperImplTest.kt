@@ -6,7 +6,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
-import org.mockito.kotlin.whenever
 import kotlin.test.assertEquals
 
 @OptIn(ExperimentalCoroutinesApi::class)
