@@ -40,7 +40,7 @@ jobs:
     name: Lint
     steps:
       - name: Ktlint
-        run: ./gradlew ktlint
+        run: ~/gradlew ktlint
       - name: Lint
         run: ./gradlew lintDevRelease
 
