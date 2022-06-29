@@ -12,7 +12,7 @@ env:
 
 
 jobs:
-  lint_test_build:
+  setup:
     name: Lint, Test and Build
     runs-on: ubuntu-latest
     steps:
@@ -33,12 +33,32 @@ jobs:
         env:
           PROPS: ${{ secrets.LOCAL_PROPERTIES }}
         run: echo -n "$PROPS" | base64 --decode > local.properties
+
+  lint:
+    needs: setup
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
       - name: Ktlint
         run: ./gradlew ktlint
       - name: Lint
         run: ./gradlew lintDevRelease
+
+
+  test:
+    needs: [setup,lint]
+    runs-on: ubuntu-latest
+    name: Unit tests
+    steps:
       - name: Unit tests
         run: ./gradlew testDevDebugUnitTest
+
+  build:
+    needs: [setup,lint,test]
+    runs-on: ubuntu-latest
+    name:  Build
+    steps:
       - name: Build the apk
         run: ./gradlew assembleDevDebug
+
 
