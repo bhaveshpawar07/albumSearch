@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.SHOUNAK_GITHUB_TOKEN  }}
+          token: ${{ secrets.BHAVESH_GITHUB_TOKEN  }}
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
@@ -36,10 +36,10 @@ jobs:
         id: sign_app
         with:
           releaseDirectory: ${{ env.RELEASE_OUTPUT_FILE }}
-          signingKeyBase64: ${{ secrets.KEYSTORE }}
+          signingKeyBase64: ${{ secrets.KEY_STORE }}
           alias: ${{ secrets.KEY_ALIAS }}
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
+          keyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
         env:
           BUILD_TOOLS_VERSION: "30.0.3"
       - name: Generate the new Tag from Version Code
@@ -59,8 +59,8 @@ jobs:
       - name: Upload apk to App Center
         uses: wzieba/AppCenter-Github-Action@v1
         with:
-          appName: ${{secrets.ORG_NAME}}/${{secrets.APP_NAME}}
-          token: ${{secrets.APPCENTER_USER_API_KEY}}
+          appName: ${{secrets.APPCENTER_USER_NAME}}/${{secrets.APP_NAME}}
+          token: ${{secrets.APPCENTER_API_KEY}}
           group: ${{secrets.GROUP_NAME}}
           file: ${{steps.sign_app.outputs.signedReleaseFile}}
           notifyTesters: true
