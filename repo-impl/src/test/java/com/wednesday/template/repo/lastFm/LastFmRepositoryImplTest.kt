@@ -2,6 +2,7 @@ package com.wednesday.template.repo.lastFm
 
 import com.wednesday.template.repo.lastFm.models.albumMappedFromRemote
 import com.wednesday.template.repo.lastFm.models.resultAlbum
+import com.wednesday.template.service.lastFm.LastFmLocalService
 import com.wednesday.template.service.lastFm.LastFmRemoteService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -22,14 +23,17 @@ class LastFmRepositoryImplTest {
 
     private lateinit var lastFmRemoteService: LastFmRemoteService
     private lateinit var domainAlbumMapper: DomainAlbumMapper
-    private lateinit var lastFmRepositoryImpl: LastFmRepositoryImpl
+    private lateinit var lastFmRepositoryImpl: LastFmRepository
+    private lateinit var localAlbumMapper: LocalAlbumMapper
+    private lateinit var lastFmLocalService: LastFmLocalService
 
     @Before
     fun setUp() {
         lastFmRemoteService = mock()
         domainAlbumMapper = mock()
-
-        lastFmRepositoryImpl = LastFmRepositoryImpl(lastFmRemoteService, domainAlbumMapper)
+        localAlbumMapper = mock()
+        lastFmLocalService =mock()
+        lastFmRepositoryImpl = LastFmRepositoryImpl(lastFmRemoteService, domainAlbumMapper,lastFmLocalService,localAlbumMapper)
     }
 
     private fun verifyNoMoreInteractions() {

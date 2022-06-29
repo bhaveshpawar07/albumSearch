@@ -1,6 +1,7 @@
 package com.wednesday.template.interactor.lastFm.search.model
 
 import com.wednesday.template.domain.lastFm.Album
+import com.wednesday.template.presentation.lastFm.UIAlbum
 
 val album = Album(
     mbid = "",
@@ -15,4 +16,16 @@ val album = Album(
     lImageText = "",
     xlImageSize = "",
     xlImageText = ""
+)
+
+val uiAlbum = UIAlbum(
+    albumUrl = "test",
+    albumCoverXLarge = "xlarge",
+    albumCoverLarge = "large",
+    albumCoverMedium = "med",
+    albumCoverSmall = "small",
+    albumArtist = "artist",
+    albumName = "name",
+    isFav = true,
+    albumId = "a"
 )
