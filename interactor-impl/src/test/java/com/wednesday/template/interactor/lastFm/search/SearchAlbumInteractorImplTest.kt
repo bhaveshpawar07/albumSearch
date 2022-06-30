@@ -79,7 +79,7 @@ class SearchAlbumInteractorImplTest : InteractorTest() {
 
                     // Then
                     assertTrue(result is UIResult.Success)
-                    assertEquals(actual = result.data , expected = uiList)
+                    assertEquals(actual = result.data, expected = uiList)
                     verify(searchAlbumUseCase, times(1)).invoke(same(searchTerm))
                     verifyNoMoreInteractions()
                     cancelAndIgnoreRemainingEvents()
