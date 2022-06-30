@@ -4,18 +4,18 @@ import com.wednesday.template.domain.lastFm.Album
 import com.wednesday.template.presentation.lastFm.UIAlbum
 
 val album = Album(
-    mbid = "",
-    name = "",
-    artist = "",
-    url = "",
-    sImageSize = "",
-    sImageText = "",
-    mImageSize = "",
-    mImageText = "",
-    lImageSize = "",
-    lImageText = "",
-    xlImageSize = "",
-    xlImageText = ""
+    mbid = "1",
+    name = "test",
+    artist = "testA",
+    url = "test",
+    sImageSize = "s",
+    sImageText = "st",
+    mImageSize = "m",
+    mImageText = "mt",
+    lImageSize = "l",
+    lImageText = "lt",
+    xlImageSize = "x",
+    xlImageText = "xt"
 )
 
 val uiAlbum = UIAlbum(
