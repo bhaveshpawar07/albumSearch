@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.receiveAsFlow
+import java.lang.Exception
 
 class SearchAlbumInteractorImpl(
     private val searchAlbumUseCase: SearchAlbumUseCase,
@@ -50,7 +51,7 @@ class SearchAlbumInteractorImpl(
                     UIResult.Error(favouriteAlbum.exception)
                 }
                 else -> {
-                    UIResult.Error(error("Something went wrong"))
+                    UIResult.Error(Exception("Something went wrong"))
                 }
             }
         }
