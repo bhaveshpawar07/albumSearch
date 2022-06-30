@@ -11,6 +11,7 @@ import com.wednesday.template.interactor.lastFm.search.model.uiAlbum
 import com.wednesday.template.interactor.localFm.search.SearchAlbumInteractorImpl
 import com.wednesday.template.interactor.localFm.search.UIAlbumMapper
 import com.wednesday.template.interactor.localFm.search.UIAlbumSearchMapper
+import com.wednesday.template.presentation.base.UIList
 import com.wednesday.template.presentation.base.UIResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
@@ -24,6 +25,7 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.time.ExperimentalTime
 
@@ -62,9 +64,10 @@ class SearchAlbumInteractorImplTest : InteractorTest() {
             // Given
             val searchTerm = "Test"
             val albumList = listOf(album)
+            val uiList = UIList(uiAlbum)
             whenever(searchAlbumUseCase(searchTerm)).thenReturn(Result.Success(albumList))
             whenever(favouriteAlbumFlowUseCase(Unit)).thenReturn(flowOf(Result.Success(albumList)))
-            whenever(uiAlbumMapperImpl.map(any(), any())).thenReturn(uiAlbum)
+            whenever(uiAlbumSearchMapper.map(any(), any())).thenReturn(uiList)
 
             launchInTestScope {
                 createInteractor()
@@ -76,6 +79,7 @@ class SearchAlbumInteractorImplTest : InteractorTest() {
 
                     // Then
                     assertTrue(result is UIResult.Success)
+                    assertEquals(actual = result.data , expected = uiList)
                     verify(searchAlbumUseCase, times(1)).invoke(same(searchTerm))
                     verifyNoMoreInteractions()
                     cancelAndIgnoreRemainingEvents()
