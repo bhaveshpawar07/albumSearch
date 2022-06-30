@@ -1,5 +1,6 @@
 name: CD
 on:
+  workflow_dispatch:
   pull_request:
 #  push:
 #    branches:
@@ -10,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy the apk
     steps:
-      - run: echo ${{ secrets.BHAVESH_GITHUB_TOKEN }}
+#      - run: echo ${{ secrets.BHAVESH_GITHUB_TOKEN }}
       - uses: actions/checkout@v3
-        with:
-          repository: bhaveshpawar07/albumSearch
-          token: ${{ secrets.BHAVESH_GITHUB_TOKEN }}
+#        with:
+#          repository: bhaveshpawar07/albumSearch
+#          token: ${{ secrets.BHAVESH_GITHUB_TOKEN }}
 #          ssh-key: ${{ secrets.SSH_KEY  }}
       - uses: actions/setup-java@v2
         with:
