@@ -6,3 +6,4 @@ git commit -m "Bumped versionCode by 1 [skip ci]" # skip ci actually skips the c
 
 CURRENT_BRANCH=$(git branch --show-current)
 git push origin $CURRENT_BRANCH
+#git push origin

@@ -6,13 +6,12 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
-import org.mockito.kotlin.whenever
 import kotlin.test.assertEquals
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class DomainAlbumMapperImplTest {
 
-    private lateinit var domainAlbumMapperImpl: DomainAlbumMapperImpl
+    private lateinit var domainAlbumMapperImpl: DomainAlbumMapper
 
     @Before
     fun setup() {
@@ -24,8 +23,6 @@ class DomainAlbumMapperImplTest {
         runTest {
             // Given
             val remoteAlbums = listOf(remoteAlbum)
-            whenever(domainAlbumMapperImpl.map(remoteAlbums))
-                .thenReturn(listOf(albumMappedFromRemote))
             // When
 
             val result = domainAlbumMapperImpl.map(remoteAlbums)

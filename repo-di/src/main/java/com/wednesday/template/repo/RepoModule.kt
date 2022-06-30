@@ -6,6 +6,8 @@ import com.wednesday.template.repo.lastFm.DomainAlbumMapper
 import com.wednesday.template.repo.lastFm.DomainAlbumMapperImpl
 import com.wednesday.template.repo.lastFm.LastFmRepository
 import com.wednesday.template.repo.lastFm.LastFmRepositoryImpl
+import com.wednesday.template.repo.lastFm.LocalAlbumMapper
+import com.wednesday.template.repo.lastFm.LocalAlbumMapperImpl
 import com.wednesday.template.repo.weather.DomainCityMapper
 import com.wednesday.template.repo.weather.DomainCityMapperImpl
 import com.wednesday.template.repo.weather.DomainWeatherMapper
@@ -39,8 +41,9 @@ val repoModule = module {
     // LastFM
 
     single<DomainAlbumMapper> { DomainAlbumMapperImpl() }
+    single<LocalAlbumMapper> { LocalAlbumMapperImpl() }
 
     single<LastFmRepository> {
-        LastFmRepositoryImpl(get(), get())
+        LastFmRepositoryImpl(get(), get(), get(), get())
     }
 }

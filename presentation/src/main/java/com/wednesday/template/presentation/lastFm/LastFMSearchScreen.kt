@@ -1,3 +1,4 @@
+// ktlint-disable filename
 package com.wednesday.template.presentation.lastFm
 
 import com.wednesday.template.presentation.R

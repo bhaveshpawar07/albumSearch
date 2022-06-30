@@ -11,6 +11,8 @@ data class UIAlbum(
     val albumCoverSmall: String,
     val albumCoverMedium: String,
     val albumCoverLarge: String,
-    val albumCoverXLarge: String
+    val albumCoverXLarge: String,
+    val albumUrl: String,
+    val isFav: Boolean
 
 ) : UIListItemBase(id = "UIAlbum $albumId")
