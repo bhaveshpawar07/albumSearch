@@ -12,7 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ssh-key: ${{ secrets.SSH_KEY  }}
+          repository: bhaveshpawar07/albumSearch
+          token: ${{ secrets.BHAVESH_GITHUB_TOKEN }}
+#          ssh-key: ${{ secrets.SSH_KEY  }}
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
